@@ -27,10 +27,16 @@ def selection_sort(arr):
     return arr
 
 
+print(selection_sort(arr4))
+
+
 # TO-DO:  implement the Bubble Sort function below
 
 
 def bubble_sort(arr):
+
+    if len(arr) == 0:
+        return []
 
     while True:
         count = 0
