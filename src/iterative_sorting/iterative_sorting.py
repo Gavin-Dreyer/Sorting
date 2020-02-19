@@ -1,7 +1,7 @@
 # TO-DO: Complete the selection_sort() function below
 import random
 
-arr4 = random.sample(range(50), 20)
+arr4 = random.sample(range(100), 20)
 
 
 def selection_sort(arr):
