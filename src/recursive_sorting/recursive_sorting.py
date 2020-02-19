@@ -1,7 +1,8 @@
 # TO-DO: complete the helper function below to merge 2 sorted arrays
 import random
 
-arr5 = [66, 21, 87, 71, 65, 3, 26, 40]
+arr5 = [13, 6, 15, 44, 20, 36, 5, 73, 55, 49, 2, 25]
+arr5 = random.sample(range(100), 8)
 
 
 def merge(arrA, arrB):
@@ -16,9 +17,26 @@ def merge(arrA, arrB):
         arr = [[arr[i][0], arr[i + 1][0]]
                for i in range(len(arr) - 1) if i % 2 == 0]
 
-        arr = [arr[i] + arr[i + 1]
-               for i in range(len(arr) - 1) if i % 2 == 0]
+        print(arr)
+        new_array = []
+        while len(arr[0]) > 0 and len(arr[1]) > 0:
+            if min(arr[0]) < min(arr[1]):
+                new_array.append(min(arr[0]))
+                arr[0].remove(min(arr[0]))
+            else:
+                new_array.append(min(arr[1]))
+                arr[1].remove(min(arr[1]))
 
+        if len(arr[0]) > 0:
+            while len(arr[0]) > 0:
+                new_array.append(min(arr[0]))
+                arr[0].remove(min(arr[0]))
+        else:
+            while len(arr[1]) > 0:
+                new_array.append(min(arr[1]))
+                arr[1].remove(min(arr[1]))
+
+        arr = [new_array]
     return arr
 
 
@@ -36,7 +54,25 @@ def merge_sort(arr):
         if merge(t[0:len(t)//2], t[len(t)//2:]) != []:
             return merge(t[0:len(t)//2], t[len(t)//2:])
 
-    return t
+    final = []
+    while len(t[0]) > 0 and len(t[1]) > 0:
+        if min(t[0]) < min(t[1]):
+            final.append(min(t[0]))
+            t[0].remove(min(t[0]))
+        else:
+            final.append(min(t[1]))
+            t[1].remove(min(t[1]))
+
+    if len(t[0]) > 0:
+        while len(t[0]) > 0:
+            final.append(min(t[0]))
+            t[0].remove(min(t[0]))
+    else:
+        while len(t[1]) > 0:
+            final.append(min(t[1]))
+            t[1].remove(min(t[1]))
+
+    return final
 
 
 print(merge_sort(arr5))
@@ -87,27 +123,26 @@ def timsort(arr):
 my_list = [5, 9, 3, 7, 2, 8, 1, 6]
 
 
-# def partition(data):
-#     left = []
-#     pivot = data[0]
-#     right = []
+def partition(data):
+    left = []
+    pivot = data[0]
+    right = []
 
-#     for item in data[1:]:
-#         if item < pivot:
-#             left.append(item)
+    for item in data[1:]:
+        if item < pivot:
+            left.append(item)
 
-#         else:  # Handling > or =
-#             right.append(item)
+        else:  # Handling > or =
+            right.append(item)
+    return left, pivot, right
 
-#     return left, pivot, right
 
+def quicksort(data):
+    if data == []:
+        return data
 
-# def quicksort(data):
-#     if data == []:
-#         return data
-
-#     left, pivot, right = partition(data)
-#     return quicksort(left) + [pivot] + quicksort(right)
+    left, pivot, right = partition(data)
+    return quicksort(left) + [pivot] + quicksort(right)
 
 
 # print(quicksort(my_list))
@@ -129,3 +164,20 @@ my_list = [5, 9, 3, 7, 2, 8, 1, 6]
 #           for i in range(len(arrB) - 1) if i % 2 == 0]
 
 #     print(ta, tb)
+
+
+# if arr[0][0] < arr[1][0]:
+#             new_array = [arr[0][0], arr[1][0]]
+#         else:
+#             new_array = [arr[1][0], arr[0][0]]
+
+#         if arr[0][1] < arr[1][1]:
+#             if arr[0][1] < new_array[1]:
+#                 new_array = [new_array[0], arr[0][1], new_array[1], arr[1][1]]
+#             else:
+#                 new_array = new_array + [arr[0][1]] + [arr[1][1]]
+#         else:
+#             if arr[1][1] < new_array[1]:
+#                 new_array = [new_array[0], arr[1][1], new_array[1], arr[0][1]]
+#             else:
+#                 new_array = new_array + [arr[1][1]] + [arr[0][1]]

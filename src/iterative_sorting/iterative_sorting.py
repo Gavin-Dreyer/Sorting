@@ -3,6 +3,8 @@ import random
 
 arr4 = random.sample(range(100), 20)
 
+print(arr4)
+
 
 def selection_sort(arr):
 
